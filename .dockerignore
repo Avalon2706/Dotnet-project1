@@ -1,4 +1,4 @@
-*
+
 !/src/**
 !/tests/**
 !*.sln
@@ -12,4 +12,5 @@
 **/*~
 **/*.log
 **/.DS_Store
+
 **/Thumbs.db
