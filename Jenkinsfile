@@ -16,39 +16,26 @@ pipeline {
                     echo "Build Number: $buildNumber"
 
                     // Use them in shell commands
-                    sh 'sudo docker --version'
-                    sh 'sudo dotnet --info'
-                }
-            }
-        }
-
-        stage('Checkout Jenkins Upgrade3 Git Repository') {
-            steps {
-                script {
-                    // Clone the Git repository's master branch
-                    def gitRepoUrl = 'https://github.com/Avalon2706/Dotnet-project1.git'
-
-                    checkout([$class: 'GitSCM', 
-                        branches: [[name: '*/master']], 
-                        userRemoteConfigs: [[url: gitRepoUrl]], 
-                        extensions: [[$class: 'CleanBeforeCheckout'], [$class: 'CloneOption', noTags: false, shallow: true, depth: 1]]
-                    ])
+                    sh 'docker --version'
+                    sh 'dotnet --info'
+                    
                 }
             }
         }
 
         stage('build and create docker image') {
             steps {
-                sh 'docker build -f Dockerfile.fixed -t $IMAGE '
+                sh 'docker build -f Dockerfile.fixed -t $IMAGE . '
             }
         } 
 
         stage ('Pushing docker image to registry') {
             steps {
+                script {
                 docker.withRegistry('https://index.docker.io/','dockerhub-creds'){
-                    sh 'Docker push $IMAGE'
+                    sh 'docker push $IMAGE'
     
-
+                }
         
 
         
