@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        IMAGE = "gparag27/TestProject:latest"
+        IMAGE = "gparag27/testproject:latest"
         }
     stages {
         stage('Verify Shell Environment') {
