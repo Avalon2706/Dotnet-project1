@@ -32,7 +32,7 @@ pipeline {
         stage ('Pushing docker image to registry') {
             steps {
                 script {
-                docker.withRegistry('https://index.docker.io/','dockerhub-creds'){
+                docker.withRegistry('','dockerhub-creds'){
                     sh 'docker push $IMAGE'
     
                 }
